@@ -136,6 +136,18 @@
       cursor: pointer; transition: background 0.2s;
     }
     .room-card .book-btn:hover { background: #2d5240; }
+    .room-card .book-btn.booked-today {
+      background: #c0392b; cursor: default;
+    }
+    .room-card .book-btn.booked-today:hover { background: #c0392b; transform: none; box-shadow: none; }
+    .booked-notice {
+      font-size: 0.8rem; color: #c0392b; margin-top: 6px;
+      font-weight: 600; display: none;
+    }
+    .avail-notice {
+      font-size: 0.8rem; color: #27ae60; margin-top: 6px;
+      font-weight: 600; display: none;
+    }
 
     /* === BOOKING MODAL === */
     .modal-overlay {
@@ -168,6 +180,18 @@
       margin: 6px 0 20px; font-size: 0.95rem; line-height: 2;
     }
     .modal-summary .total { font-size: 1.2rem; font-weight: 700; color: var(--green); }
+    .conflict-warning {
+      background: #fdecea; border: 1.5px solid #e74c3c; border-radius: 10px;
+      padding: 12px 16px; margin: 8px 0 16px; color: #c0392b;
+      font-size: 0.93rem; display: none;
+    }
+    .conflict-warning.show { display: block; }
+    .booked-dates-list {
+      background: #fff8e1; border-radius: 10px; padding: 12px 16px;
+      margin-bottom: 16px; font-size: 0.88rem; color: #7d5a00; display: none;
+    }
+    .booked-dates-list.show { display: block; }
+    .booked-dates-list strong { display: block; margin-bottom: 4px; }
     .modal-contact {
       display: none; background: var(--dark); color: white;
       border-radius: 14px; padding: 22px; text-align: center; margin-top: 8px;
@@ -355,7 +379,9 @@
           <p class="room-detail">🛏 เตียงคู่ · มีระเบียงด้านหน้า · ชมวิวสวน</p>
           <div class="price">700 บาท <span>/ คืน</span></div>
           <p style="font-size:0.85rem; color:#888; margin-top:4px;">750 บาท รวมเครื่องดื่ม + ขนมปังปิ้ง</p>
-          <button class="book-btn" onclick="openBooking('ห้องระเบียงริมสวน', 700, 750)">📅 จองห้องนี้</button>
+          <button class="book-btn" id="btn-ห้องระเบียงริมสวน" onclick="openBooking('ห้องระเบียงริมสวน', 700, 750)">📅 จองห้องนี้</button>
+          <p class="booked-notice" id="notice-ห้องระเบียงริมสวน"></p>
+          <p class="avail-notice" id="avail-ห้องระเบียงริมสวน"></p>
         </div>
       </div>
 
@@ -367,7 +393,9 @@
           <p class="room-detail">🛏 เตียงคู่ · ห้องน้ำในตัว · บรรยากาศส่วนตัว</p>
           <div class="price">700 บาท <span>/ คืน</span></div>
           <p style="font-size:0.85rem; color:#888; margin-top:4px;">750 บาท รวมเครื่องดื่ม + ขนมปังปิ้ง</p>
-          <button class="book-btn" onclick="openBooking('ห้องมาตรฐาน A', 700, 750)">📅 จองห้องนี้</button>
+          <button class="book-btn" id="btn-ห้องมาตรฐาน A" onclick="openBooking('ห้องมาตรฐาน A', 700, 750)">📅 จองห้องนี้</button>
+          <p class="booked-notice" id="notice-ห้องมาตรฐาน A"></p>
+          <p class="avail-notice" id="avail-ห้องมาตรฐาน A"></p>
         </div>
       </div>
 
@@ -379,7 +407,9 @@
           <p class="room-detail">🛏 เตียงคู่ · ห้องน้ำในตัว · บรรยากาศส่วนตัว</p>
           <div class="price">700 บาท <span>/ คืน</span></div>
           <p style="font-size:0.85rem; color:#888; margin-top:4px;">750 บาท รวมเครื่องดื่ม + ขนมปังปิ้ง</p>
-          <button class="book-btn" onclick="openBooking('ห้องมาตรฐาน B', 700, 750)">📅 จองห้องนี้</button>
+          <button class="book-btn" id="btn-ห้องมาตรฐาน B" onclick="openBooking('ห้องมาตรฐาน B', 700, 750)">📅 จองห้องนี้</button>
+          <p class="booked-notice" id="notice-ห้องมาตรฐาน B"></p>
+          <p class="avail-notice" id="avail-ห้องมาตรฐาน B"></p>
         </div>
       </div>
 
@@ -391,7 +421,9 @@
           <p class="room-detail">🛏🛏 สองเตียง · ห้องน้ำในตัว · บรรยากาศส่วนตัว</p>
           <div class="price">850 บาท <span>/ คืน</span></div>
           <p style="font-size:0.85rem; color:#888; margin-top:4px;">900 บาท รวมเครื่องดื่ม + ขนมปังปิ้ง</p>
-          <button class="book-btn" onclick="openBooking('ห้องเตียงคู่พิเศษ', 850, 900)">📅 จองห้องนี้</button>
+          <button class="book-btn" id="btn-ห้องเตียงคู่พิเศษ" onclick="openBooking('ห้องเตียงคู่พิเศษ', 850, 900)">📅 จองห้องนี้</button>
+          <p class="booked-notice" id="notice-ห้องเตียงคู่พิเศษ"></p>
+          <p class="avail-notice" id="avail-ห้องเตียงคู่พิเศษ"></p>
         </div>
       </div>
 
@@ -455,11 +487,20 @@
         <option value="yes">รวมเครื่องดื่ม + ขนมปังปิ้ง</option>
       </select>
 
+      <div class="booked-dates-list" id="bookedDatesList">
+        <strong>📋 วันที่ไม่ว่างของห้องนี้:</strong>
+        <span id="bookedDatesText"></span>
+      </div>
+
       <div class="modal-summary">
         <div id="summaryText">— กรุณาเลือกวันเช็คอิน —</div>
       </div>
 
-      <button class="modal-confirm-btn" onclick="goStep2()">ถัดไป: อัพโหลดสลิป →</button>
+      <div class="conflict-warning" id="conflictWarning">
+        🚫 ห้องนี้ถูกจองแล้วในช่วงวันที่เลือก กรุณาเลือกวันอื่น
+      </div>
+
+      <button class="modal-confirm-btn" id="stepNextBtn" onclick="goStep2()">ถัดไป: อัพโหลดสลิป →</button>
     </div>
 
     <!-- STEP 2: ข้อมูลลูกค้า + อัพสลิป -->
@@ -625,14 +666,116 @@
 </footer>
 
 <script>
+  // ====== AVAILABILITY ======
+  let bookingsData = { rooms: {} };
+  let currentRoomName = '';
+
+  async function loadBookings() {
+    try {
+      const res = await fetch('./bookings.json?t=' + Date.now());
+      bookingsData = await res.json();
+    } catch(e) {
+      bookingsData = { rooms: {} };
+    }
+    updateAllRoomCards();
+  }
+
+  // Returns true if checkin–checkout range overlaps any booking for this room
+  function hasConflict(roomName, checkin, checkout) {
+    const bookings = (bookingsData.rooms || {})[roomName] || [];
+    const cin  = new Date(checkin);
+    const cout = new Date(checkout);
+    return bookings.some(b => {
+      const bc  = new Date(b.checkin);
+      const bco = new Date(b.checkout);
+      return cin < bco && cout > bc;
+    });
+  }
+
+  // Format date range for display (Thai short format)
+  function fmtRange(checkin, checkout) {
+    const options = { day: 'numeric', month: 'short' };
+    const cin  = new Date(checkin);
+    const cout = new Date(checkout);
+    return cin.toLocaleDateString('th-TH', options) + ' – ' + cout.toLocaleDateString('th-TH', options);
+  }
+
+  // Get future bookings for a room (checkin >= today)
+  function getFutureBookings(roomName) {
+    const bookings = (bookingsData.rooms || {})[roomName] || [];
+    const today = new Date().toISOString().split('T')[0];
+    return bookings.filter(b => b.checkout > today).sort((a,b) => a.checkin.localeCompare(b.checkin));
+  }
+
+  // Check if room has booking overlapping today (currently occupied)
+  function isOccupiedToday(roomName) {
+    const today = new Date().toISOString().split('T')[0];
+    const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
+    const todayStr = today;
+    const tomorrowStr = tomorrow.toISOString().split('T')[0];
+    return hasConflict(roomName, todayStr, tomorrowStr);
+  }
+
+  function updateAllRoomCards() {
+    const rooms = ['ห้องระเบียงริมสวน', 'ห้องมาตรฐาน A', 'ห้องมาตรฐาน B', 'ห้องเตียงคู่พิเศษ'];
+    rooms.forEach(room => {
+      const btn       = document.getElementById('btn-' + room);
+      const notice    = document.getElementById('notice-' + room);
+      const availNote = document.getElementById('avail-' + room);
+      if(!btn) return;
+
+      const future = getFutureBookings(room);
+      const occupied = isOccupiedToday(room);
+
+      if(occupied) {
+        btn.textContent = '🔴 ไม่ว่างคืนนี้';
+        btn.classList.add('booked-today');
+        btn.onclick = null;
+        notice.textContent = '🔴 มีผู้เข้าพักอยู่';
+        notice.style.display = 'block';
+        availNote.style.display = 'none';
+      } else {
+        btn.textContent = '📅 จองห้องนี้';
+        btn.classList.remove('booked-today');
+        notice.style.display = 'none';
+        if(future.length > 0) {
+          availNote.textContent = '📋 ไม่ว่าง: ' + future.map(b => fmtRange(b.checkin, b.checkout)).join(', ');
+          availNote.style.display = 'block';
+        } else {
+          availNote.textContent = '✅ ว่างทุกวัน';
+          availNote.style.display = 'block';
+        }
+      }
+    });
+  }
+
   // ====== BOOKING MODAL ======
-  const PHONE = '080-591-8620';
   let basePrice = 700, breakfastPrice = 750;
 
   function openBooking(roomName, base, withBreakfast) {
+    // Block if occupied today
+    if(isOccupiedToday(roomName)) return;
+
+    currentRoomName = roomName;
     basePrice = base;
     breakfastPrice = withBreakfast;
     document.getElementById('modalRoomName').textContent = '🏠 ' + roomName;
+
+    // Show booked dates in modal
+    const future = getFutureBookings(roomName);
+    const bdList = document.getElementById('bookedDatesList');
+    const bdText = document.getElementById('bookedDatesText');
+    if(future.length > 0) {
+      bdText.textContent = future.map(b => fmtRange(b.checkin, b.checkout)).join('  |  ');
+      bdList.classList.add('show');
+    } else {
+      bdList.classList.remove('show');
+    }
+
+    // Reset conflict warning
+    document.getElementById('conflictWarning').classList.remove('show');
+    document.getElementById('stepNextBtn').disabled = false;
+    document.getElementById('stepNextBtn').style.opacity = '1';
 
     // Reset to step 1
     document.getElementById('step1').style.display = 'block';
@@ -679,7 +822,24 @@
 
     if(!checkin || !checkout || checkout <= checkin) {
       document.getElementById('summaryText').innerHTML = '— กรุณาเลือกวันเช็คอินและเช็คเอาต์ —';
+      document.getElementById('conflictWarning').classList.remove('show');
+      document.getElementById('stepNextBtn').disabled = false;
+      document.getElementById('stepNextBtn').style.opacity = '1';
       return;
+    }
+
+    // Check conflict
+    const conflict = hasConflict(currentRoomName, checkin, checkout);
+    const conflictEl = document.getElementById('conflictWarning');
+    const nextBtn    = document.getElementById('stepNextBtn');
+    if(conflict) {
+      conflictEl.classList.add('show');
+      nextBtn.disabled = true;
+      nextBtn.style.opacity = '0.4';
+    } else {
+      conflictEl.classList.remove('show');
+      nextBtn.disabled = false;
+      nextBtn.style.opacity = '1';
     }
 
     const cin    = new Date(checkin);
@@ -701,6 +861,9 @@
     const checkout = document.getElementById('checkoutDate').value;
     if(!checkin || !checkout || checkout <= checkin) {
       alert('กรุณาเลือกวันเช็คอินและเช็คเอาต์ให้ถูกต้อง'); return;
+    }
+    if(hasConflict(currentRoomName, checkin, checkout)) {
+      alert('ห้องนี้ถูกจองแล้วในช่วงวันที่เลือก กรุณาเลือกวันอื่น'); return;
     }
 
     const nights = Math.round((new Date(checkout) - new Date(checkin)) / (1000*60*60*24));
@@ -742,9 +905,6 @@
     btn.textContent = '⏳ กำลังส่ง...';
     btn.disabled = true;
 
-    // Let formsubmit handle the actual POST
-    // After a short delay show success (formsubmit redirects by default)
-    // We use _next to redirect back, so we show step3 manually
     e.preventDefault();
     const form = document.getElementById('bookingForm');
     const data = new FormData(form);
@@ -779,6 +939,9 @@
         ?.scrollIntoView({ behavior: 'smooth' });
     });
   });
+
+  // Load bookings on page load
+  loadBookings();
 </script>
 
 </body>
