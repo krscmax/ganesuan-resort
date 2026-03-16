@@ -874,12 +874,11 @@
 
     // Fill hidden fields
     document.getElementById('fRoom').value     = roomName;
-    document.getElementById('fCheckin').value  = fmt(cin);
-    document.getElementById('fCheckout').value = fmt(cout);
+    document.getElementById('fCheckin').value  = checkin;   // ISO format for Apps Script
+    document.getElementById('fCheckout').value = checkout;  // ISO format for Apps Script
     document.getElementById('fNights').value   = nights + ' คืน';
     document.getElementById('fBreakfast').value= bf ? 'รวมเครื่องดื่ม+ขนมปังปิ้ง' : 'ไม่รวม';
     document.getElementById('fTotal').value    = total.toLocaleString() + ' บาท';
-    document.getElementById('emailSubject').value = '🏨 จองที่พัก: ' + roomName + ' | ' + fmt(cin);
 
     // Show summary in step2
     document.getElementById('step2Summary').innerHTML =
